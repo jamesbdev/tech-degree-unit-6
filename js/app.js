@@ -17,7 +17,13 @@ const getRandomPhraseAsArray = (arr) => {
 }
 
 const addPhraseToDisplay = (arr) => {
+    const list = document.querySelector("#phrase ul");
 
+   for(let i = 0; i < arr.length; i++) {
+      const li = document.createElement("li");
+      li.innerText = arr[i];
+      list.appendChild(li);
+   }
 }
 
 getRandomPhraseAsArray(phrases);
