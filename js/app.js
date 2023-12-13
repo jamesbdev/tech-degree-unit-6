@@ -93,7 +93,7 @@ const checkWin = () => {
     console.log('player won game')
     //show the overlay screen for win
     winOverlay.style.display = 'block';
-  } else if (missed >= 5) {
+  } else if (missed == 5) {
     //if missed variable is equal to or greater than 5 
     //show that the player has lost the game 
     loseOverlay.style.display = 'block';
@@ -109,7 +109,6 @@ keyboard.addEventListener('click', (event) => {
   //check if chosen letter matches the phrase 
   const check = checkLetter(button);
   //set button to disabled
-  console.log(check);
   button.setAttribute('disabled', "disabled");
   if (check == null) {
     missed += 1;
