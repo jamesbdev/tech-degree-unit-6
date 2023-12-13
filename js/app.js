@@ -1,11 +1,21 @@
 //Declare variables
 const keyboard = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
-const overlay = document.getElementById('overlay');
+const overlay = document.querySelector('.start');
+const winOverlay = document.querySelector('.win');
+const loseOverlay = document.querySelector('.lose');
 const phrases = ["html is cool", "sunny in England", "kpop music", "rainy in Seoul", "New York City"]
 let missed = 0;
 
 const startBtn = document.querySelector('.btn__reset');
+
+const hideOverlays = () => {
+  winOverlay.style.display = 'none';
+  loseOverlay.style.display = 'none'; 
+}
+
+//hide the overlays at the begining of the game
+hideOverlays();
 
 //add an event listenr to remove the starting modal
 startBtn.addEventListener('click', () => {
@@ -28,6 +38,7 @@ const addPhraseToDisplay = (arr) => {
       const li = document.createElement("li");
       li.innerText = arr[i];
       if (arr[i] != " ") {
+        //set class of 'letter'
         li.className = "letter";
       }
       list.appendChild(li);
@@ -50,6 +61,7 @@ const checkLetter = (button) => {
     const letter = letters[i].innerText.toLowerCase();
     const btnText = button.innerText;
     if (btnText == letter) {
+      //add 'show' class
       letters[i].classList.add("show");
       const matchingLetter = letter[i];
       return matchingLetter;
@@ -59,9 +71,9 @@ const checkLetter = (button) => {
   }
 }
 
+//changes heart to empty heart 
 const changeHeart = () => {
   const hearts = document.querySelectorAll('.tries');
-  console.log(hearts);
   //loop through hearts
   if (hearts) {
     for(let i = 0; i < hearts.length; i++){
@@ -73,6 +85,25 @@ const changeHeart = () => {
 
 
 }
+
+const checkWin = () => {
+  //check if number of letters with class "show" is the same as letters with class "letters"
+  //count letters with class show
+  const show = document.getElementsByClassName('show');
+  const letters = document.getElementsByClassName('letter');
+  if (show.length == letters.length) {
+    console.log('player won game')
+    //show the overlay screen for win
+    winOverlay.style.display = 'block';
+  } else if (missed >= 5) {
+    //if missed variable is equal to or greater than 5 
+    //show that the player has lost the game 
+    loseOverlay.style.display = 'block';
+  }
+
+
+}
+
 
 //Add event listener to keyboard
 keyboard.addEventListener('click', (event) => {
@@ -89,10 +120,11 @@ keyboard.addEventListener('click', (event) => {
     //change heart to half heart
     changeHeart();
   }
-  
-
 } 
 );
+
+
+
 
 
 
