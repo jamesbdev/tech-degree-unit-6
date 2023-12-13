@@ -82,8 +82,6 @@ const changeHeart = () => {
       break;
     }
   }
-
-
 }
 
 const checkWin = () => {
@@ -100,8 +98,6 @@ const checkWin = () => {
     //show that the player has lost the game 
     loseOverlay.style.display = 'block';
   }
-
-
 }
 
 
@@ -120,6 +116,8 @@ keyboard.addEventListener('click', (event) => {
     //change heart to half heart
     changeHeart();
   }
+  //call function to check if player has won or lost
+  checkWin();
 } 
 );
 
