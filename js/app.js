@@ -8,12 +8,8 @@ const phrases = ["html is cool", "sunny in England", "kpop music", "rainy in Seo
 let missed = 0;
 
 const startBtn = document.querySelector('.btn__reset');
+const hearts = document.querySelectorAll('.tries');
 
-
-//add an event listenr to remove the starting modal
-startBtn.addEventListener('click', () => {
-  overlay.style.display = 'none';
-})
 
 //chooses a random phrase from the phrases array
 const getRandomPhraseAsArray = (arr) => {
@@ -38,7 +34,7 @@ const addPhraseToDisplay = (arr) => {
 }
 
 //assign new phrase to phraseArray
-const phraseArray = getRandomPhraseAsArray(phrases);
+let phraseArray = getRandomPhraseAsArray(phrases);
 //append the phrase to the DOM
 addPhraseToDisplay(phraseArray);
 
@@ -66,7 +62,7 @@ const checkLetter = (button) => {
 
 //changes heart to empty heart 
 const changeHeart = () => {
-  const hearts = document.querySelectorAll('.tries');
+
   //loop through hearts
   if (hearts) {
     for(let i = 0; i < hearts.length; i++){
@@ -86,11 +82,13 @@ const checkWin = () => {
     //show the overlay screen for win
     overlay.classList.add('win');
     overlay.style.display = 'block';
+    //add reset class to button
   } else if (missed == 5) {
     //if missed variable is equal to or greater than 5 
     //show that the player has lost the game 
     overlay.classList.add('lose');
     overlay.style.display = 'block';
+    //add reset class to button 
   }
 }
 
@@ -114,6 +112,8 @@ keyboard.addEventListener('click', (event) => {
     }
     //call function to check if player has won or lost
     checkWin();
+    //add reset class to modal button
+    button.classList.add('reset'); 
   }
 
 } 
@@ -132,15 +132,26 @@ const recreateKeyboard = () => {
   }
 }
 
-const resetPhrase = () => {
+//removes the current phrase from the DOM
+const removePhrase = () => {
 //select the current phrase
 const lis = document.querySelectorAll('#phrase li');
-for (let i = 0; i < lis.length; i++) {
-  const li = lis[i];
-  li.remove();
+  for (let i = 0; i < lis.length; i++) {
+    const li = lis[i];
+    li.remove();
+  }
 }
-//create new phrase and add to DOM
 
+//resets the hearts to full heart
+//reset score to 0;
+const resetHearts = () => {
+  //reset missed to 0
+  missed = 0;
+  //set hearts to the full heart image
+  for (let i = 0; i < hearts.length; i++) {
+    const heart = hearts[i];
+    heart.setAttribute('src', 'images/liveHeart.png');
+  }
 }
 
 //reset game functionality
@@ -151,10 +162,26 @@ const resetGame = () => {
   //recreate keyboard 
   recreateKeyboard();
   //add new phrase 
+  removePhrase();
+  //create new phrase array
+  const newPhrase = getRandomPhraseAsArray(phrases)
+  //add new phrase
+  addPhraseToDisplay(newPhrase);
+
   //reset score to 0 
+  resetHearts();
 }
 
 
+//add an event listenr to remove the starting modal
+startBtn.addEventListener('click', () => {
+  //check if button has class of reset 
+  //if yes call resetGame function 
+  if (button.classList.contains('reset')) {
+    resetGame();
+  }
+  overlay.style.display = 'none';
+})
 
 
 
