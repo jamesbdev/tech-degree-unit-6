@@ -85,7 +85,6 @@ const checkWin = () => {
   const letters = document.getElementsByClassName('letter');
   if (show.length == letters.length) {
     //show the overlay screen for win
-    debugger;
     overlay.classList.add('win');
     overlay.style.display = 'block';
   } else if (missed == 5) {
