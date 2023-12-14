@@ -9,13 +9,6 @@ let missed = 0;
 
 const startBtn = document.querySelector('.btn__reset');
 
-const hideOverlays = () => {
-  winOverlay.style.display = 'none';
-  loseOverlay.style.display = 'none'; 
-}
-
-//hide the overlays at the begining of the game
-hideOverlays();
 
 //add an event listenr to remove the starting modal
 startBtn.addEventListener('click', () => {
@@ -56,19 +49,18 @@ addPhraseToDisplay(phraseArray);
 // if no return null 
 const checkLetter = (button) => {
   const letters = document.getElementsByClassName('letter');
+  let match = null;
   //loop through letters in the phrase array
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i].innerText.toLowerCase();
-    const btnText = button.innerText;
+    const btnText = button.innerText.toLowerCase();
     //if the btn character matches the array character
     if (btnText == letter) {
       //add 'show' class
       letters[i].classList.add("show");
-      const match = letter[i];
-      return match;
-      } else {
-      return null;
-    }
+      match = letter;
+      break;
+      }
   }
 }
 
@@ -93,11 +85,11 @@ const checkWin = () => {
   if (show.length == letters.length) {
     console.log('player won game')
     //show the overlay screen for win
-    winOverlay.style.display = 'block';
+    overlay.classList.add('win');
   } else if (missed == 5) {
     //if missed variable is equal to or greater than 5 
     //show that the player has lost the game 
-    loseOverlay.style.display = 'block';
+    overlay.classList.add('lose');
   }
 }
 
@@ -111,6 +103,7 @@ keyboard.addEventListener('click', (event) => {
     //set button attribute to disabled
     //check if chosen letter matches the phrase 
     const check = checkLetter(button);
+    check;
     //set button to disabled
     button.setAttribute('disabled', "disabled");
     if (check == null) {
