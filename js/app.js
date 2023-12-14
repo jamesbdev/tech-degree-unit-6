@@ -62,6 +62,7 @@ const checkLetter = (button) => {
       found = true;
       }
   }
+  return found;
 }
 
 //changes heart to empty heart 
@@ -83,13 +84,15 @@ const checkWin = () => {
   const show = document.getElementsByClassName('show');
   const letters = document.getElementsByClassName('letter');
   if (show.length == letters.length) {
-    console.log('player won game')
     //show the overlay screen for win
+    debugger;
     overlay.classList.add('win');
+    overlay.style.display = 'block';
   } else if (missed == 5) {
     //if missed variable is equal to or greater than 5 
     //show that the player has lost the game 
     overlay.classList.add('lose');
+    overlay.style.display = 'block';
   }
 }
 
@@ -106,7 +109,7 @@ keyboard.addEventListener('click', (event) => {
     check;
     //set button to disabled
     button.setAttribute('disabled', "disabled");
-    if (check == null) {
+    if (check == false) {
       missed += 1;
       //change heart to half heart
       changeHeart();
