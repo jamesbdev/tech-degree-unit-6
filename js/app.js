@@ -113,7 +113,7 @@ keyboard.addEventListener('click', (event) => {
     //call function to check if player has won or lost
     checkWin();
     //add reset class to modal button
-    button.classList.add('reset'); 
+    startBtn.classList.add('reset'); 
   }
 
 } 
@@ -174,10 +174,10 @@ const resetGame = () => {
 
 
 //add an event listenr to remove the starting modal
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener('click', (element) => {
   //check if button has class of reset 
   //if yes call resetGame function 
-  if (button.classList.contains('reset')) {
+  if (startBtn.classList.contains('reset')) {
     resetGame();
   }
   overlay.style.display = 'none';
