@@ -60,11 +60,12 @@ const checkLetter = (button) => {
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i].innerText.toLowerCase();
     const btnText = button.innerText;
+    //if the btn character matches the array character
     if (btnText == letter) {
       //add 'show' class
       letters[i].classList.add("show");
-      const matchingLetter = letter[i];
-      return matchingLetter;
+      const match = letter[i];
+      return match;
       } else {
       return null;
     }
@@ -103,20 +104,24 @@ const checkWin = () => {
 
 //Add event listener to keyboard
 keyboard.addEventListener('click', (event) => {
-  const button = event.target;
-  button.className = 'chosen';
-  //set button attribute to disabled
-  //check if chosen letter matches the phrase 
-  const check = checkLetter(button);
-  //set button to disabled
-  button.setAttribute('disabled', "disabled");
-  if (check == null) {
-    missed += 1;
-    //change heart to half heart
-    changeHeart();
+  if (event.target.tagName == 'BUTTON' && event.target.className !== "chosen") {
+    const button = event.target;
+    //add class of chosen  
+    button.className = 'chosen';
+    //set button attribute to disabled
+    //check if chosen letter matches the phrase 
+    const check = checkLetter(button);
+    //set button to disabled
+    button.setAttribute('disabled', "disabled");
+    if (check == null) {
+      missed += 1;
+      //change heart to half heart
+      changeHeart();
+    }
+    //call function to check if player has won or lost
+    checkWin();
   }
-  //call function to check if player has won or lost
-  checkWin();
+
 } 
 );
 
