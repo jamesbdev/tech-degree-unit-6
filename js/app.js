@@ -25,8 +25,7 @@ const getRandomPhraseAsArray = (arr) => {
 //choose a random phrase to display 
 //append new array to DOM
 const addPhraseToDisplay = (arr) => {
-    const list = document.querySelector("#phrase ul");
-
+  const list = document.querySelector("#phrase ul");
    for(let i = 0; i < arr.length; i++) {
       const li = document.createElement("li");
       li.innerText = arr[i];
@@ -119,6 +118,43 @@ keyboard.addEventListener('click', (event) => {
 
 } 
 );
+
+
+//resets the keyboard when the player starts the game again
+const recreateKeyboard = () => {
+  const keys = keyboard.getElementsByTagName('button');
+  for (let i = 0; i < keys.length; i++) {
+    const button = keys[i];
+    if (button.className == 'chosen') {
+      button.classList.remove('chosen');
+      button.removeAttribute('disabled');
+    }
+  }
+}
+
+const resetPhrase = () => {
+//select the current phrase
+const lis = document.querySelectorAll('#phrase li');
+for (let i = 0; i < lis.length; i++) {
+  const li = lis[i];
+  li.remove();
+}
+//create new phrase and add to DOM
+
+}
+
+//reset game functionality
+const resetGame = () => {
+  //add reset buttons in win and lost modals 
+  // change button inner text
+  startBtn.innerText = 'Play again';
+  //recreate keyboard 
+  recreateKeyboard();
+  //add new phrase 
+  //reset score to 0 
+}
+
+
 
 
 
