@@ -49,7 +49,8 @@ addPhraseToDisplay(phraseArray);
 // if no return null 
 const checkLetter = (button) => {
   const letters = document.getElementsByClassName('letter');
-  let match = null;
+  //let match = null;
+  let found = false;
   //loop through letters in the phrase array
   for (let i = 0; i < letters.length; i++) {
     const letter = letters[i].innerText.toLowerCase();
@@ -58,8 +59,7 @@ const checkLetter = (button) => {
     if (btnText == letter) {
       //add 'show' class
       letters[i].classList.add("show");
-      match = letter;
-      break;
+      found = true;
       }
   }
 }
