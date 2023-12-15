@@ -69,7 +69,6 @@ const changeHeart = () => {
       break;
   }
   missed++;
-  console.log(missed);
 }
 
 
