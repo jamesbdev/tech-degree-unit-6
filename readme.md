@@ -1,0 +1,1 @@
+This is the project for unit 6 of the Front end development Tech Degree. It uses JavaScript to program a simple game in the DOM.
