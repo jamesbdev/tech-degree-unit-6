@@ -61,14 +61,21 @@ const checkLetter = button => {
 
 //changes heart to empty heart 
 const changeHeart = () => {
-  //loop through hearts
-  let mistakes = 0;
-  const heartsImages = document.getElementsByClassName('tries');
-  if (mistakes < heartsImages.length) {
-    heartsImages[mistakes].firstElementChild.setAttribute('src', 'images/lostHeart.png');
-    heartsImages[mistakes].classList.remove('tries');
-    mistakes ++;
+
+  const heartsLis = document.getElementsByClassName('tries');
+  const heartImages = document.getElementsByTagName('img');
+  for (let i = 0; i < heartImages.length; i++) {
+    //get hearts that are full 
+    //if heart is full, turn it to empty 
+    if (heartImages[i].className !== 'empty') {
+      heartImages[i].setAttribute('src', 'images/lostHeart.png');
+      heartImages[i].className = 'empty';
+      missed++ ;
+    }
+    break;
   }
+
+  console.log(missed);
 }
 
 //checks if player has won or lost the game
@@ -79,22 +86,19 @@ const checkWin = () => {
   const title = document.querySelector('h2');
   const show = document.getElementsByClassName('show');
   const letters = document.getElementsByClassName('letter');
-  const message = document.createElement('p');
-  message.innerText = "";
-  message.className = 'result-message';
+
+
   if (show.length == letters.length) {
     //show the overlay screen for win
     overlay.classList.add('win');
-    message.innerText = 'You have won the game!';
-    title.after(message);
-    overlay.style.display = 'block';
+    title.innerText = 'You have won the game!';
+    overlay.style.display = 'flex';
   } else if (missed > 4) {
     //if missed variable is equal to or greater than 5 
     //show that the player has lost the game 
     overlay.classList.add('lose');
-    message.innerText = 'Sorry, you have lost. Try again!';
-    title.after(message);
-    overlay.style.display = 'block';
+    title.innerText = 'Sorry, you have lost. Try again!';
+    overlay.style.display = 'flex';
   }
 }
 
