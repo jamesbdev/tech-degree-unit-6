@@ -62,12 +62,12 @@ const checkLetter = (button) => {
 //changes heart to empty heart 
 const changeHeart = () => {
   //loop through hearts
-  if (hearts) {
-    for(let i = 0; i < hearts.length; i++){
-      hearts[i].firstElementChild.setAttribute('src', 'images/lostHeart.png');
-      hearts[i].classList.remove('tries');
-      break;
-    }
+  let mistakes = 0;
+  const heartsImages = document.getElementsByClassName('tries');
+  if (mistakes< heartsImages.length) {
+    heartsImages[mistakes].firstElementChild.setAttribute('src', 'images/lostHeart.png');
+    heartsImages[mistakes].classList.remove('tries');
+    mistakes ++;
   }
 }
 
@@ -103,9 +103,9 @@ keyboard.addEventListener('click', (event) => {
     //set button to disabled
     button.setAttribute('disabled', "disabled");
     if (check == false) {
-      missed ++;
       //remove one heart
       changeHeart();
+      missed++;
     }
     //call function to check if player has won or lost
     checkWin();
