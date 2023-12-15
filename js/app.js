@@ -28,6 +28,8 @@ const addPhraseToDisplay = arr => {
       if (arr[i] != " ") {
         //set class of 'letter'
         li.className = "letter";
+      } else {
+        li.className = 'space';
       }
       list.appendChild(li);
    }
