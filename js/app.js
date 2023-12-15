@@ -12,7 +12,7 @@ const hearts = document.querySelectorAll('.tries');
 
 
 //chooses a random phrase from the phrases array
-const getRandomPhraseAsArray = (arr) => {
+const getRandomPhraseAsArray = arr => {
   const randomIndex = Math.floor(Math.random() * arr.length);
   const newArr = arr[randomIndex].split('');
   return newArr;
@@ -20,7 +20,7 @@ const getRandomPhraseAsArray = (arr) => {
 
 //choose a random phrase to display 
 //append new array to DOM
-const addPhraseToDisplay = (arr) => {
+const addPhraseToDisplay = arr => {
   const list = document.querySelector("#phrase ul");
    for(let i = 0; i < arr.length; i++) {
       const li = document.createElement("li");
@@ -42,7 +42,7 @@ addPhraseToDisplay(phraseArray);
 //check if letter is a match 
 // if yes display the letter, return the letter
 // if no return null 
-const checkLetter = (button) => {
+const checkLetter = button => {
   const letters = document.getElementsByClassName('letter');
   let found = false;
   //loop through letters in the phrase array
@@ -171,8 +171,7 @@ const resetGame = () => {
 
 //add an event listenr to remove the starting modal
 startBtn.addEventListener('click', (element) => {
-  //check if button has class of reset 
-  //if yes call resetGame function 
+  //check if button has class of reset, reset the game
   if (startBtn.classList.contains('reset')) {
     resetGame();
   }
