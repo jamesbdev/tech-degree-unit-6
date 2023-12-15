@@ -96,9 +96,8 @@ const checkWin = () => {
   }
 }
 
-
-//Add event listener to keyboard
-keyboard.addEventListener('click', (event) => {
+//checks if the letter matches and shows the letter if it's a match
+const clickLetter = (event) => {
   if (event.target.tagName == 'BUTTON' && event.target.className !== "chosen") {
     const button = event.target;
     //add class of chosen  
@@ -109,7 +108,6 @@ keyboard.addEventListener('click', (event) => {
     //set button to disabled
     button.setAttribute('disabled', "disabled");
     if (check == false) {
-      //remove one heart
       changeHeart();
     }
     //call function to check if player has won or lost
@@ -117,9 +115,11 @@ keyboard.addEventListener('click', (event) => {
     //add reset class to modal button
     startBtn.classList.add('reset'); 
   }
+}
+//Add event listener to keyboard
+keyboard.addEventListener('click', clickLetter);
 
-} 
-);
+
 
 
 //resets the keyboard when the player starts the game again
