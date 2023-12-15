@@ -4,7 +4,7 @@ const phrase = document.getElementById('phrase');
 const overlay = document.querySelector('.start');
 const winOverlay = document.querySelector('.win');
 const loseOverlay = document.querySelector('.lose');
-const phrases = ["html is cool", "sunny in England", "kpop music", "rainy in Seoul", "New York City"]
+const phrases = ["HTML is cool", "Sunny in England", "kpop music", "rainy in Seoul", "New York City"]
 let missed = 0;
 
 const startBtn = document.querySelector('.btn__reset');
@@ -44,7 +44,6 @@ addPhraseToDisplay(phraseArray);
 // if no return null 
 const checkLetter = (button) => {
   const letters = document.getElementsByClassName('letter');
-  //let match = null;
   let found = false;
   //loop through letters in the phrase array
   for (let i = 0; i < letters.length; i++) {
@@ -52,17 +51,16 @@ const checkLetter = (button) => {
     const btnText = button.innerText.toLowerCase();
     //if the btn character matches the array character
     if (btnText == letter) {
-      //add 'show' class
-      letters[i].classList.add("show");
+      //display the letter that was matched
+      letters[i].classList.add('show');
       found = true;
-      }
+    }
   }
   return found;
 }
 
 //changes heart to empty heart 
 const changeHeart = () => {
-
   //loop through hearts
   if (hearts) {
     for(let i = 0; i < hearts.length; i++){
@@ -73,6 +71,8 @@ const changeHeart = () => {
   }
 }
 
+//checks if player has won or lost the game
+//Displays a modal to show the result
 const checkWin = () => {
   //check if number of letters with class "show" is the same as letters with class "letters"
   //count letters with class show
@@ -82,13 +82,11 @@ const checkWin = () => {
     //show the overlay screen for win
     overlay.classList.add('win');
     overlay.style.display = 'block';
-    //add reset class to button
-  } else if (missed == 5) {
+  } else if (missed > 4) {
     //if missed variable is equal to or greater than 5 
     //show that the player has lost the game 
     overlay.classList.add('lose');
     overlay.style.display = 'block';
-    //add reset class to button 
   }
 }
 
@@ -102,12 +100,11 @@ keyboard.addEventListener('click', (event) => {
     //set button attribute to disabled
     //check if chosen letter matches the phrase 
     const check = checkLetter(button);
-    check;
     //set button to disabled
     button.setAttribute('disabled', "disabled");
     if (check == false) {
-      missed += 1;
-      //change heart to half heart
+      missed ++;
+      //remove one heart
       changeHeart();
     }
     //call function to check if player has won or lost
@@ -167,7 +164,6 @@ const resetGame = () => {
   const newPhrase = getRandomPhraseAsArray(phrases)
   //add new phrase
   addPhraseToDisplay(newPhrase);
-
   //reset score to 0 
   resetHearts();
 }
