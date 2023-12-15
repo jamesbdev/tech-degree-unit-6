@@ -64,7 +64,7 @@ const changeHeart = () => {
   //loop through hearts
   let mistakes = 0;
   const heartsImages = document.getElementsByClassName('tries');
-  if (mistakes< heartsImages.length) {
+  if (mistakes < heartsImages.length) {
     heartsImages[mistakes].firstElementChild.setAttribute('src', 'images/lostHeart.png');
     heartsImages[mistakes].classList.remove('tries');
     mistakes ++;
@@ -76,16 +76,24 @@ const changeHeart = () => {
 const checkWin = () => {
   //check if number of letters with class "show" is the same as letters with class "letters"
   //count letters with class show
+  const title = document.querySelector('h2');
   const show = document.getElementsByClassName('show');
   const letters = document.getElementsByClassName('letter');
+  const message = document.createElement('p');
+  message.innerText = "";
+  message.className = 'result-message';
   if (show.length == letters.length) {
     //show the overlay screen for win
     overlay.classList.add('win');
+    message.innerText = 'You have won the game!';
+    title.after(message);
     overlay.style.display = 'block';
   } else if (missed > 4) {
     //if missed variable is equal to or greater than 5 
     //show that the player has lost the game 
     overlay.classList.add('lose');
+    message.innerText = 'Sorry, you have lost. Try again!';
+    title.after(message);
     overlay.style.display = 'block';
   }
 }
@@ -153,18 +161,15 @@ const resetHearts = () => {
 
 //reset game functionality
 const resetGame = () => {
-  //add reset buttons in win and lost modals 
   // change button inner text
   startBtn.innerText = 'Play again';
-  //recreate keyboard 
   recreateKeyboard();
-  //add new phrase 
   removePhrase();
   //create new phrase array
   const newPhrase = getRandomPhraseAsArray(phrases)
   //add new phrase
   addPhraseToDisplay(newPhrase);
-  //reset score to 0 
+  //reset missed score to 0 
   resetHearts();
 }
 
