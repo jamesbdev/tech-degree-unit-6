@@ -61,22 +61,17 @@ const checkLetter = button => {
 
 //changes heart to empty heart 
 const changeHeart = () => {
-
-  const heartsLis = document.getElementsByClassName('tries');
-  const heartImages = document.getElementsByTagName('img');
+  //const heartsLis = document.getElementsByClassName('tries');
+  const heartImages = document.querySelectorAll('.tries img:not(.empty)');
   for (let i = 0; i < heartImages.length; i++) {
-    //get hearts that are full 
-    //if heart is full, turn it to empty 
-    if (heartImages[i].className !== 'empty') {
       heartImages[i].setAttribute('src', 'images/lostHeart.png');
-      heartImages[i].className = 'empty';
-      missed++ ;
-    }
-    break;
+      heartImages[i].className = 'empty'; 
+      break;
   }
-
+  missed++;
   console.log(missed);
 }
+
 
 //checks if player has won or lost the game
 //Displays a modal to show the result
@@ -117,7 +112,6 @@ keyboard.addEventListener('click', (event) => {
     if (check == false) {
       //remove one heart
       changeHeart();
-      missed++;
     }
     //call function to check if player has won or lost
     checkWin();
@@ -157,9 +151,11 @@ const resetHearts = () => {
   //reset missed to 0
   missed = 0;
   //set hearts to the full heart image
-  for (let i = 0; i < hearts.length; i++) {
-    const heart = hearts[i];
+  const emptyHearts = document.querySelectorAll('.empty');
+  for (let i = 0; i < emptyHearts.length; i++) {
+    const heart = emptyHearts[i];
     heart.setAttribute('src', 'images/liveHeart.png');
+    heart.classList.remove('empty');
   }
 }
 
@@ -173,8 +169,9 @@ const resetGame = () => {
   const newPhrase = getRandomPhraseAsArray(phrases)
   //add new phrase
   addPhraseToDisplay(newPhrase);
-  //reset missed score to 0 
   resetHearts();
+  //remove win and lose classes from modal
+  overlay.classList.remove('win', 'lose');
 }
 
 
@@ -183,6 +180,7 @@ startBtn.addEventListener('click', (element) => {
   //check if button has class of reset, reset the game
   if (startBtn.classList.contains('reset')) {
     resetGame();
+  
   }
   overlay.style.display = 'none';
 })
